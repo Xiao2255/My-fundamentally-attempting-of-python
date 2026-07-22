@@ -23,3 +23,27 @@ def my_fundation():
         yield i
 print(my_fundation())
 
+#7.22 bmi计算器
+
+name = input("请输入您的姓名：")
+height =float(input("请输入您的身高(m)："))
+weight =float(input("请输入您的体重(kg)："))
+def calculate_bmi(height,weight):
+
+    bmi = weight / (height * height)
+    return bmi
+bmi = calculate_bmi(height,weight)
+
+def judge_bmi(bmi):
+    if bmi >= 25:
+        return "臭胖子"
+    elif bmi <17:
+        return "死竹竿"
+    else:
+        return "请继续保持"
+
+result = judge_bmi(bmi)
+
+def show_result(name,bmi,result):
+    print(f"亲爱的：{name}, 您的健康体重指数为： {bmi:.2f}，我们给您的评价是：{result}")
+show_result(name,bmi,result)
