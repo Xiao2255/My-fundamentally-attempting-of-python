@@ -50,7 +50,7 @@ def load_student():
             students.append(student)
 
         return students
-    except:
+    except FileNotFoundError:
         return []
 
 students = load_student()
@@ -77,6 +77,7 @@ def add_student(students):
 
    student = Student(name,score)
    students.append(student)
+   save_students(students)      #解决了修改过程中无法保存的问题
    print("添加成功！")
 
 def show_student(students):
@@ -114,6 +115,7 @@ def alter_student(students):
                    print("请输入数字！")
 
             student.score = score
+            save_students(students)
             print(f'修改成功！当前{student.name}的成绩更新后为{student.score}')
             found = True
             break
@@ -126,6 +128,7 @@ def delete_student(students):
     for student in students:
         if student.name == name:
             students.remove(student)
+            save_students(students)
             print("删除成功！")
             found = True
             break
@@ -145,16 +148,21 @@ def average_score(students):
     print(f'学生的人数为{count}')
     max_score = students[0].score
     min_score = students[0].score
-    for student in students:
+
+    max_student = students[0].name
+    min_student = students[0].name
+    for student in students[1:]:
         if student.score < min_score:
             min_score = student.score
+            min_student = student.name
         if student.score > max_score:
             max_score = student.score
+            max_student = student.name
     total = 0
     for student in students:
         total += student.score
     average = round(total / len(students),2)
-    print(f'学生中最高分为{max_score},最低分为：{min_score},全部学生的平均分为：{average}')
+    print(f'学生中最高分为{max_score}, 名字是：{max_student},最低分为：{min_score}, 名字是：{min_student},全部学生的平均分为：{average}')
 
 
 
