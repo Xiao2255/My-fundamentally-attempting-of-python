@@ -50,12 +50,12 @@ def average_score(students):
     total = 0
     for student in students:
         total += student["score"]
-    avg = total / len(students)
+    avg = round(total / len(students), 2)
     max_score = students[0]["score"]
     min_score = students[0]["score"]
     max_student = students[0]["name"]
     min_student = students[0]["name"]
-    for student in students:
+    for student in students[1:]:
             if student["score"] > max_score:
                 max_student = student["name"]
                 max_score = student["score"]
