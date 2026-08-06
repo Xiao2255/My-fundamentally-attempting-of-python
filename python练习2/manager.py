@@ -1,5 +1,7 @@
+from decorators import log_operation
 from student import Student
 
+@log_operation
 def add_student(students):
     name = input("请输入学生姓名：")
     for student in students:
@@ -51,6 +53,7 @@ def find_student(students):
     if not found:
             print("暂无该学生信息！")
 
+@log_operation
 def delete_student(students):
     name = input("请输入需要删除学生的姓名：")
     found = False
@@ -63,12 +66,17 @@ def delete_student(students):
     if not found:
             print("暂无该学生信息！")
 
+@log_operation
 def update_student(students):
     name = input("请输入需要更新成绩的学生的姓名：")
     try:
         new_score = int(input("请输入更新后的成绩："))
+        if new_score < 0 or new_score > 100:
+            print("请输入正确数字！")
+            return
     except ValueError:
         print("请输入数字！")
+        return
     found = False
     for student in students:
         if student.name == name:
